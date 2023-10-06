@@ -68,6 +68,45 @@ console.log(`The Average of numbers is: ${averageValue}`); */
 
 
 
+// Function that takes two numbers as parameters and returns their sum
+function addNumbers(a: number, b: number): number {
+    return a + b;
+}
+
+const result: number = addNumbers(5, 10);
+console.log("Sum:", result); // Output: Sum: 15
+
+
+
+// Function expression that squares a number
+const square = function(num: number): number {
+    return num * num;
+}
+
+const squaredValue: number = square(4);
+console.log("Squared Value:", squaredValue); // Output: Squared Value: 16
+
+
+
+// Function with optional and default parameters
+function greet(name: string, age?: number, greeting: string = "Hello"): void {
+    if (age) {
+        console.log(`${greeting}, ${name}! You are ${age} years old.`);
+    } else {
+        console.log(`${greeting}, ${name}!`);
+    }
+}
+
+greet("Alice"); // Output: Hello, Alice!
+greet("Bob", 30); // Output: Hello, Bob! You are 30 years old.
+greet("Charlie", undefined, "Hi"); // Output: Hi, Charlie!
+
+
+
+
+
+
+
 
 
 
