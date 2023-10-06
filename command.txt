@@ -1,0 +1,43 @@
+tsc index.ts
+node index.js
+
+By default, if you compile multiple TypeScript files separately, it will indeed generate a separate JavaScript file for each TypeScript file. This can lead to a proliferation of JavaScript files, especially in larger projects.
+
+However, TypeScript has a solution for this problem through module systems. When using modules, you can organize your TypeScript code into multiple files without generating a separate JavaScript file for each TypeScript file. Instead, you can compile all your TypeScript files into a single JavaScript file or a smaller number of output files.
+
+Here's how you can do it:
+
+### Step 1: Organize your TypeScript Files
+Organize your TypeScript files into logical modules. For example, you can have separate files for different functionalities or components of your application.
+
+#### File: `mathOperations.ts`
+```typescript
+export function sum(a: number, b: number): number {
+    return a + b;
+}
+```
+
+#### File: `main.ts`
+```typescript
+import { sum } from './mathOperations';
+
+console.log(sum(5, 10));
+```
+
+### Step 2: Compile TypeScript Files into a Single JavaScript File
+Compile all your TypeScript files into a single JavaScript file using the `--outFile` or `-outFile` option:
+
+```bash
+tsc --outFile output.js mathOperations.ts main.ts
+```
+
+In this example, `output.js` will contain the compiled JavaScript code from both `mathOperations.ts` and `main.ts`.
+
+### Step 3: Run the Compiled JavaScript File
+Run the compiled JavaScript file using Node.js:
+
+```bash
+node output.js
+```
+
+This approach allows you to organize your TypeScript code into multiple files without generating a large number of JavaScript files. The key is to use TypeScript modules and compile all the necessary files into a single output file.
