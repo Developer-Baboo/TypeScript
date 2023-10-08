@@ -31,7 +31,6 @@ Functions and Interfaces in TypeScript:
 
 TASK
 Create a application for ATM machine
-
 1- Accepts 4 digits pin code for authorization, if wrong pin code inserted try again for 3 times and then close the application.
 2- After authorization user can choose for any option from following 
     Withdraw, Balance Check, Transfer, Change pin, Exit
