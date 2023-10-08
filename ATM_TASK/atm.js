@@ -2,21 +2,16 @@ var pincode = 1234;
 var maxAttempts = 3;
 var balance = 20000;
 var accountNumbers = [123456789, 987654321, 234567890, 876543210];
-// Function to check if an account number is valid
-function isValidAccount(accountNumber) {
+var isValidAccount = function (accountNumber) {
     return accountNumbers.includes(accountNumber);
-}
-function withdraw(amount) {
+};
+var withdraw = function (amount) {
     var minWithdrawalAmount = 500;
     var maxWithdrawalAmount = 25000;
     if (amount >= minWithdrawalAmount && amount <= maxWithdrawalAmount && amount % 500 === 0) {
         if (balance >= amount) {
             balance -= amount;
             console.log("Withdrawal successful. Remaining balance: ".concat(balance));
-            // function askForAnotherTransaction() {
-            //     let response = prompt("Do you want to perform another transaction? (1 for Yes, 0 for No):");
-            //     return response === '1';
-            // }
         }
         else {
             console.log("Insufficient funds.");
@@ -25,14 +20,11 @@ function withdraw(amount) {
     else {
         console.log("Invalid amount for withdrawal. Amount must be in multiples of 500, minimum 500, and maximum 25000.");
     }
-}
-function checkBalance() {
+};
+var checkBalance = function () {
     console.log("Your Available Balance is: ".concat(balance));
-}
-// function transfer(amount: number, recipientAccountNumber: number): void {
-//     // Logic for transferring amount
-// }
-function transfer(amount, recipientAccountNumber) {
+};
+var transfer = function (amount, recipientAccountNumber) {
     if (balance >= amount) {
         var recipientIndex = accountNumbers.indexOf(recipientAccountNumber);
         if (recipientIndex !== -1) {
@@ -46,8 +38,8 @@ function transfer(amount, recipientAccountNumber) {
     else {
         console.log("Insufficient funds for transfer.");
     }
-}
-function changePin(oldPin, newPin) {
+};
+var changePin = function (oldPin, newPin) {
     if (oldPin === pincode) {
         pincode = newPin;
         console.log("Pin changed successfully.");
@@ -55,7 +47,7 @@ function changePin(oldPin, newPin) {
     else {
         console.log("Incorrect old pin. Pin change failed.");
     }
-}
+};
 var attempts = 0;
 var continueTransactions = true;
 while (attempts < maxAttempts && continueTransactions) {
@@ -73,7 +65,6 @@ while (attempts < maxAttempts && continueTransactions) {
                     var withdrawAmount = Number(prompt("Enter amount to withdraw (multiples of 500, min 500, max 25000):"));
                     if (withdrawAmount >= 500 && withdrawAmount <= 25000 && withdrawAmount % 500 === 0) {
                         withdraw(withdrawAmount);
-                        // continueTransactions = askForAnotherTransaction();
                     }
                     else {
                         console.log("Invalid amount for withdrawal.");
@@ -81,7 +72,6 @@ while (attempts < maxAttempts && continueTransactions) {
                     break;
                 case 2:
                     checkBalance();
-                    // continueTransactions = askForAnotherTransaction();
                     break;
                 case 3:
                     var recipientAccountNumber = Number(prompt("Enter recipient's 9-digit account number:"));
