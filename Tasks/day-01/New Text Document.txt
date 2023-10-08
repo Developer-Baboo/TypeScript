@@ -28,14 +28,21 @@ Functions and Interfaces in TypeScript:
 11- Define an interface Shape with a method area() that returns a number. Create two classes, Circle and Rectangle,
  both implementing the Shape interface. Write functions to calculate and display the area of a circle and a rectangle.
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 TASK
 Create a application for ATM machine
-1- Accepts 4 digits pin code for authorization, if wrong pin code inserted try again for 3 times and then close the application.
+1- Accepts 4 digits pin code for authorization, if wrong pin 
+code inserted try again for 3 times and then close the application.(done)
+
+
 2- After authorization user can choose for any option from following 
-    Withdraw, Balance Check, Transfer, Change pin, Exit
-3- Withdraw option ask user for amount in multiples of 500 limit it with min 500 and max 25000. after user amount 
+    Withdraw, Balance Check, Transfer, Change pin, Exit (done)
+
+
+3- Withdraw option ask user for amount in multiples of 500 limit it with min 500 and 
+max 25000. after user amount 
 deduct the withdraw amount from balance.
+
 4- Ask user for another transaction or exit
 5- if user choose another transaction again move to point 2
 6- Balance check return remaining balance of account

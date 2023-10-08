@@ -2,6 +2,10 @@ var pincode = 1234;
 var maxAttempts = 3;
 var balance = 20000;
 var accountNumbers = [123456789, 987654321, 234567890, 876543210];
+// Function to check if an account number is valid
+function isValidAccount(accountNumber) {
+    return accountNumbers.includes(accountNumber);
+}
 function withdraw(amount) {
     var minWithdrawalAmount = 500;
     var maxWithdrawalAmount = 25000;
@@ -9,6 +13,10 @@ function withdraw(amount) {
         if (balance >= amount) {
             balance -= amount;
             console.log("Withdrawal successful. Remaining balance: ".concat(balance));
+            // function askForAnotherTransaction() {
+            //     let response = prompt("Do you want to perform another transaction? (1 for Yes, 0 for No):");
+            //     return response === '1';
+            // }
         }
         else {
             console.log("Insufficient funds.");
@@ -48,16 +56,12 @@ function changePin(oldPin, newPin) {
         console.log("Incorrect old pin. Pin change failed.");
     }
 }
-function askForAnotherTransaction() {
-    var response = Number("Do you want to perform another transaction? (yes/no):");
-    return response == 1;
-}
 var attempts = 0;
 var continueTransactions = true;
 while (attempts < maxAttempts && continueTransactions) {
     var userPin = Number(prompt("Enter your 4-digit pin code:"));
     if (userPin === pincode) {
-        do {
+        while (continueTransactions) {
             console.log("1. Withdraw");
             console.log("2. Balance Check");
             console.log("3. Transfer");
@@ -69,7 +73,7 @@ while (attempts < maxAttempts && continueTransactions) {
                     var withdrawAmount = Number(prompt("Enter amount to withdraw (multiples of 500, min 500, max 25000):"));
                     if (withdrawAmount >= 500 && withdrawAmount <= 25000 && withdrawAmount % 500 === 0) {
                         withdraw(withdrawAmount);
-                        continueTransactions = askForAnotherTransaction();
+                        // continueTransactions = askForAnotherTransaction();
                     }
                     else {
                         console.log("Invalid amount for withdrawal.");
@@ -77,19 +81,22 @@ while (attempts < maxAttempts && continueTransactions) {
                     break;
                 case 2:
                     checkBalance();
-                    continueTransactions = askForAnotherTransaction();
+                    // continueTransactions = askForAnotherTransaction();
                     break;
                 case 3:
-                    var recipientAccountNumber = Number(prompt("Enter recipient's 13-digit account number:"));
-                    var transferAmount = Number(prompt("Enter amount to transfer:"));
-                    transfer(transferAmount, recipientAccountNumber);
-                    continueTransactions = askForAnotherTransaction();
+                    var recipientAccountNumber = Number(prompt("Enter recipient's 9-digit account number:"));
+                    if (isValidAccount(recipientAccountNumber)) {
+                        var transferAmount = Number(prompt("Enter amount to transfer:"));
+                        transfer(transferAmount, recipientAccountNumber);
+                    }
+                    else {
+                        console.log("Recipient account not found. Transfer failed.");
+                    }
                     break;
                 case 4:
                     var oldPin = Number(prompt("Enter old pin:"));
                     var newPin = Number(prompt("Enter new pin:"));
                     changePin(oldPin, newPin);
-                    continueTransactions = askForAnotherTransaction();
                     break;
                 case 5:
                     console.log("Exiting the application. Thank you!");
@@ -98,7 +105,7 @@ while (attempts < maxAttempts && continueTransactions) {
                 default:
                     console.log("Invalid choice. Please try again.");
             }
-        } while (continueTransactions);
+        }
         break;
     }
     else {

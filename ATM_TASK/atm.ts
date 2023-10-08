@@ -3,6 +3,13 @@ let maxAttempts = 3;
 let balance = 20000;
 const accountNumbers: number[] = [123456789, 987654321, 234567890, 876543210];
 
+
+
+// Function to check if an account number is valid
+function isValidAccount(accountNumber: number): boolean {
+    return accountNumbers.includes(accountNumber);
+}
+
 function withdraw(amount: number): void {
     const minWithdrawalAmount = 500;
     const maxWithdrawalAmount = 25000;
@@ -10,6 +17,10 @@ function withdraw(amount: number): void {
         if (balance >= amount) {
             balance -= amount;
             console.log(`Withdrawal successful. Remaining balance: ${balance}`);
+            // function askForAnotherTransaction() {
+            //     let response = prompt("Do you want to perform another transaction? (1 for Yes, 0 for No):");
+            //     return response === '1';
+            // }
         } else {
             console.log("Insufficient funds.");
         }
@@ -17,6 +28,7 @@ function withdraw(amount: number): void {
         console.log("Invalid amount for withdrawal. Amount must be in multiples of 500, minimum 500, and maximum 25000.");
     }
 }
+
 
 
 function checkBalance(): void {
@@ -50,18 +62,13 @@ function changePin(oldPin: number, newPin: number): void {
     }
 }
 
-function askForAnotherTransaction(): boolean {
-    let response = Number("Do you want to perform another transaction? (yes/no):");
-    return response == 1;
-}
-
 let attempts = 0;
 let continueTransactions = true;
 
 while (attempts < maxAttempts && continueTransactions) {
     let userPin = Number(prompt("Enter your 4-digit pin code:"));
     if (userPin === pincode) {
-        do {
+         while (continueTransactions) {
             console.log("1. Withdraw");
             console.log("2. Balance Check");
             console.log("3. Transfer");
@@ -74,26 +81,28 @@ while (attempts < maxAttempts && continueTransactions) {
                     let withdrawAmount = Number(prompt("Enter amount to withdraw (multiples of 500, min 500, max 25000):"));
                     if (withdrawAmount >= 500 && withdrawAmount <= 25000 && withdrawAmount % 500 === 0) {
                         withdraw(withdrawAmount);
-                        continueTransactions = askForAnotherTransaction();
+                        // continueTransactions = askForAnotherTransaction();
                     } else {
                         console.log("Invalid amount for withdrawal.");
                     }
                     break;
                 case 2:
                     checkBalance();
-                    continueTransactions = askForAnotherTransaction();
+                    // continueTransactions = askForAnotherTransaction();
                     break;
                 case 3:
-                    let recipientAccountNumber = Number(prompt("Enter recipient's 13-digit account number:"));
-                    let transferAmount = Number(prompt("Enter amount to transfer:"));
-                    transfer(transferAmount, recipientAccountNumber);
-                    continueTransactions = askForAnotherTransaction();
+                   let recipientAccountNumber = Number(prompt("Enter recipient's 9-digit account number:"));
+                    if (isValidAccount(recipientAccountNumber)) {
+                        let transferAmount = Number(prompt("Enter amount to transfer:"));
+                        transfer(transferAmount, recipientAccountNumber);
+                    } else {
+                        console.log("Recipient account not found. Transfer failed.");
+                    }
                     break;
                 case 4:
                     let oldPin = Number(prompt("Enter old pin:"));
                     let newPin = Number(prompt("Enter new pin:"));
                     changePin(oldPin, newPin);
-                    continueTransactions = askForAnotherTransaction();
                     break;
                 case 5:
                     console.log("Exiting the application. Thank you!");
@@ -102,7 +111,7 @@ while (attempts < maxAttempts && continueTransactions) {
                 default:
                     console.log("Invalid choice. Please try again.");
             }
-        } while (continueTransactions);
+        }
         break;
     } else {
         attempts++;
