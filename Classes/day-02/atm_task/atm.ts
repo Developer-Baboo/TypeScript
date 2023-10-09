@@ -1,8 +1,9 @@
 let pinCode: string = "1234";
 let maxAttempts: number = 3;
 let balance: number = 20000;
+const validAccountNumbers = ["1234567890123", "2345678901234", "3456789012345"];
 
-function authorize(event: Event) {
+const authorize = (event: Event) => {
     event.preventDefault();
     const pinInput = (document.getElementById("pinInput") as HTMLInputElement).value;
 
@@ -15,13 +16,14 @@ function authorize(event: Event) {
         maxAttempts--;
 
         if (maxAttempts === 0) {
-            document.getElementById("output")!.innerText = "Too many incorrect attempts. Exiting the application.";
+            alert("Too many incorrect attempts. Exiting the application.");
             document.getElementById("options")!.style.display = "none";
+            document.getElementById("pinInputForm")!.style.display = "none";
         }
     }
-}
+};
 
-function showWithdrawForm() {
+const showWithdrawForm = () => {
     document.getElementById("formContainer")!.innerHTML = `
         <h2>Withdraw</h2>
         <form id="withdrawForm" onsubmit="withdraw(event)">
@@ -30,9 +32,9 @@ function showWithdrawForm() {
             <button type="submit">Withdraw</button>
         </form>
     `;
-}
+};
 
-function withdraw(event: Event) {
+const withdraw = (event: Event) => {
     event.preventDefault();
     const amount = parseInt((document.getElementById("withdrawAmount") as HTMLInputElement).value);
 
@@ -43,14 +45,14 @@ function withdraw(event: Event) {
         document.getElementById("output")!.innerText = "Invalid amount for withdrawal or insufficient funds.";
     }
     clearForm();
-}
+};
 
-function checkBalance() {
+const checkBalance = () => {
     document.getElementById("output")!.innerText = `Your Available Balance is: ${balance}`;
     clearForm();
-}
+};
 
-function showTransferForm() {
+const showTransferForm = () => {
     document.getElementById("formContainer")!.innerHTML = `
         <h2>Transfer</h2>
         <form id="transferForm" onsubmit="transfer(event)">
@@ -61,53 +63,70 @@ function showTransferForm() {
             <button type="submit">Transfer</button>
         </form>
     `;
-}
+};
 
-function transfer(event: Event) {
+const transfer = (event: Event) => {
     event.preventDefault();
     const recipientAccountNumber = (document.getElementById("recipientAccountNumber") as HTMLInputElement).value;
     const transferAmount = parseInt((document.getElementById("transferAmount") as HTMLInputElement).value);
 
-    if (recipientAccountNumber.length === 13 && balance >= transferAmount && transferAmount >= 1) {
-        balance -= transferAmount;
-        document.getElementById("output")!.innerText = `Transfer successful. Remaining balance: ${balance}`;
-    } else {
+    let isValidRecipient = false;
+
+    validAccountNumbers.forEach(accountNumber => {
+        if (recipientAccountNumber === accountNumber && recipientAccountNumber.length === 13 && balance >= transferAmount && transferAmount >= 1) {
+            isValidRecipient = true;
+            balance -= transferAmount;
+            document.getElementById("output")!.innerText = `Transfer successful. Remaining balance: ${balance}`;
+        }
+    });
+
+    if (!isValidRecipient) {
         document.getElementById("output")!.innerText = "Invalid recipient account or transfer amount exceeds balance.";
     }
-    clearForm();
-}
 
-function showChangePinForm() {
-    document.getElementById("formContainer")!.innerHTML = `
+    clearForm();
+};
+
+const showChangePinForm = (): void => {
+    const formContainer = document.getElementById("formContainer") as HTMLElement;
+    formContainer.innerHTML = `
         <h2>Change PIN</h2>
-        <form id="pinChangeForm" onsubmit="changePin(event)">
+        <form id="pinChangeForm">
+            <label for="oldPin">Enter old 4-digit PIN:</label>
+            <input type="password" id="oldPin" required>
             <label for="newPin">Enter new 4-digit PIN:</label>
-            <input type="password" id="newPin" pattern="\d{4}" required>
-            <button type="submit">Change PIN</button>
+            <input type="password" id="newPin" required>
+            <button type="button" onclick="changePin()">Change PIN</button>
         </form>
     `;
-}
+};
 
-function changePin(event: Event) {
-    event.preventDefault();
-    const newPin = (document.getElementById("newPin") as HTMLInputElement).value;
+const changePin = (): void => {
+    const oldPinInput = document.getElementById("oldPin") as HTMLInputElement;
+    const newPinInput = document.getElementById("newPin") as HTMLInputElement;
 
-    if (newPin.length === 4) {
+    const oldPin: string = oldPinInput.value;
+    const newPin: string = newPinInput.value;
+
+    const outputElement = document.getElementById("output") as HTMLElement;
+
+    if (oldPin === pinCode && newPin.length === 4 && /^\d+$/.test(newPin)) {
         pinCode = newPin;
-        document.getElementById("output")!.innerText = "PIN changed successfully.";
+        outputElement.innerText = "PIN changed successfully.";
     } else {
-        document.getElementById("output")!.innerText = "Invalid PIN. Please enter a 4-digit number.";
+        outputElement.innerText = "Invalid old PIN or new PIN. Please enter valid 4-digit numbers.";
     }
-    clearForm();
-}
 
-function exit() {
+    clearForm();
+};
+
+const exit = () => {
     document.getElementById("output")!.innerText = "Exiting the application. Thank you!";
     document.getElementById("options")!.style.display = "none";
     document.getElementById("formContainer")!.innerText = "";
-}
+};
 
-function clearForm() {
+const clearForm = () => {
     const forms = document.querySelectorAll('form');
     forms.forEach(form => form.reset());
-}
+};
