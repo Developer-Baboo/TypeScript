@@ -10,7 +10,6 @@ interface User {
 }
 
 let user: User = {};
-
 let city = user?.profile?.address?.city;
 console.log(city); // Output: undefined
 
@@ -31,7 +30,7 @@ console.log(result); // Output: undefined
 
 // Here, `result` is `undefined` because `calc` is `null`, so the `add` method is not invoked.
 
-//  Example 3: Optional Chaining with Arrays
+//  Example 3: Optional Chaining with Arrays : 
 let data: number[] | null = null;
 let firstElement = data?.[0];
 console.log(firstElement); // Output: undefined

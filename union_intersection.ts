@@ -27,6 +27,14 @@ function calculateArea(shape: Shape): number {
     }
 }
 
+// Example usage
+const square: Square = { kind: "square", size: 5 };
+const circle: Circle = { kind: "circle", radius: 3 };
+
+console.log("Square Area:", calculateArea(square)); // Output: Square Area: 25
+console.log("Circle Area:", calculateArea(circle)); // Output: Circle Area: 28.274333882308138
+
+
 //  Example 3: Union with Literal Types
 // typescript
 // Union with literal types
@@ -46,23 +54,31 @@ processStatus("warning"); // Error: Argument of type '"warning"' is not assignab
 //  Example 1: Intersection of Object Types
 // typescript
 // Intersection of object types
-type Person = {
+
+type Person1 = {
     name: string;
     age: number;
-};
+}
+type employee = {
+    employeeid: number,
+    salary:number,
+}
 
-type Employee = {
-    employeeId: number;
-    jobTitle: string;
-};
+type Employee1 = Person1 & employee;
+let employee1: Employee1 = {
+    name: "Baboo",
+    age: 22,
+    employeeid: 1,
+    salary:200000
+}
 
-type EmployeePerson = Person & Employee;
-let employeePerson: EmployeePerson = {
-    name: "John",
-    age: 30,
-    employeeId: 123,
-    jobTitle: "Developer"
-};
+console.log(`Name ${employee1.name}`);
+console.log(`Age ${employee1.age}`);
+console.log(`Employee Id ${employee1.employeeid}`);
+console.log(`Salary ${employee1.salary}`);
+
+
+
 
 //  Example 2: Intersection with Function Types
 // typescript
