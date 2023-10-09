@@ -21,7 +21,8 @@ var authorize = function (event) {
     }
 };
 var showWithdrawForm = function () {
-    document.getElementById("formContainer").innerHTML = "\n        <h2>Withdraw</h2>\n        <form id=\"withdrawForm\" onsubmit=\"withdraw(event)\">\n            <label for=\"withdrawAmount\">Enter amount to withdraw (multiples of 500, min 500, max 25000):</label>\n            <input type=\"number\" id=\"withdrawAmount\" required>\n            <button type=\"submit\">Withdraw</button>\n        </form>\n    ";
+    var formContainer = document.getElementById("formContainer");
+    formContainer.innerHTML = "\n        <div class=\"container mt-4\">\n            <h2 class=\"mb-3\">Withdraw</h2>\n            <form id=\"withdrawForm\" onsubmit=\"withdraw(event)\">\n                <div class=\"form-group\">\n                    <label for=\"withdrawAmount\">Enter amount to withdraw (multiples of 500, min 500, max 25000):</label>\n                    <input type=\"number\" class=\"form-control\" id=\"withdrawAmount\" required>\n                </div>\n                <button type=\"submit\" class=\"btn btn-primary\">Withdraw</button>\n            </form>\n        </div>\n    ";
 };
 var withdraw = function (event) {
     event.preventDefault();
@@ -40,7 +41,8 @@ var checkBalance = function () {
     clearForm();
 };
 var showTransferForm = function () {
-    document.getElementById("formContainer").innerHTML = "\n        <h2>Transfer</h2>\n        <form id=\"transferForm\" onsubmit=\"transfer(event)\">\n            <label for=\"recipientAccountNumber\">Enter recipient's 13-digit account number:</label>\n            <input type=\"text\" id=\"recipientAccountNumber\" required>\n            <label for=\"transferAmount\">Enter amount to transfer:</label>\n            <input type=\"number\" id=\"transferAmount\" required>\n            <button type=\"submit\">Transfer</button>\n        </form>\n    ";
+    var formContainer = document.getElementById("formContainer");
+    formContainer.innerHTML = "\n        <div class=\"container mt-4\">\n            <h2 class=\"mb-3\">Transfer</h2>\n            <form id=\"transferForm\" onsubmit=\"transfer(event)\">\n                <div class=\"form-group\">\n                    <label for=\"recipientAccountNumber\">Enter recipient's 13-digit account number:</label>\n                    <input type=\"text\" class=\"form-control\" id=\"recipientAccountNumber\" required>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"transferAmount\">Enter amount to transfer:</label>\n                    <input type=\"number\" class=\"form-control\" id=\"transferAmount\" required>\n                </div>\n                <button type=\"submit\" class=\"btn btn-primary\">Transfer</button>\n            </form>\n        </div>\n    ";
 };
 var transfer = function (event) {
     event.preventDefault();
@@ -61,7 +63,7 @@ var transfer = function (event) {
 };
 var showChangePinForm = function () {
     var formContainer = document.getElementById("formContainer");
-    formContainer.innerHTML = "\n        <h2>Change PIN</h2>\n        <form id=\"pinChangeForm\">\n            <label for=\"oldPin\">Enter old 4-digit PIN:</label>\n            <input type=\"password\" id=\"oldPin\" required>\n            <label for=\"newPin\">Enter new 4-digit PIN:</label>\n            <input type=\"password\" id=\"newPin\" required>\n            <button type=\"button\" onclick=\"changePin()\">Change PIN</button>\n        </form>\n    ";
+    formContainer.innerHTML = "\n        <div class=\"container mt-4\">\n            <h2 class=\"mb-3\">Change PIN</h2>\n            <form id=\"pinChangeForm\">\n                <div class=\"form-group\">\n                    <label for=\"oldPin\">Enter old 4-digit PIN:</label>\n                    <input type=\"password\" class=\"form-control\" id=\"oldPin\" required>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"newPin\">Enter new 4-digit PIN:</label>\n                    <input type=\"password\" class=\"form-control\" id=\"newPin\" required>\n                </div>\n                <button type=\"button\" class=\"btn btn-primary\" onclick=\"changePin()\">Change PIN</button>\n            </form>\n        </div>\n    ";
 };
 var changePin = function () {
     var oldPinInput = document.getElementById("oldPin");
@@ -79,7 +81,7 @@ var changePin = function () {
     clearForm();
 };
 var exit = function () {
-    document.getElementById("output").innerText = "Exiting the application. Thank you!";
+    document.getElementById("output").innerText = "Thank you! for Using our application";
     document.getElementById("options").style.display = "none";
     document.getElementById("formContainer").innerText = "";
 };

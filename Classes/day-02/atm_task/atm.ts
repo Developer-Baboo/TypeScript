@@ -24,13 +24,18 @@ const authorize = (event: Event) => {
 };
 
 const showWithdrawForm = () => {
-    document.getElementById("formContainer")!.innerHTML = `
-        <h2>Withdraw</h2>
-        <form id="withdrawForm" onsubmit="withdraw(event)">
-            <label for="withdrawAmount">Enter amount to withdraw (multiples of 500, min 500, max 25000):</label>
-            <input type="number" id="withdrawAmount" required>
-            <button type="submit">Withdraw</button>
-        </form>
+    const formContainer = document.getElementById("formContainer");
+    formContainer.innerHTML = `
+        <div class="container mt-4">
+            <h2 class="mb-3">Withdraw</h2>
+            <form id="withdrawForm" onsubmit="withdraw(event)">
+                <div class="form-group">
+                    <label for="withdrawAmount">Enter amount to withdraw (multiples of 500, min 500, max 25000):</label>
+                    <input type="number" class="form-control" id="withdrawAmount" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Withdraw</button>
+            </form>
+        </div>
     `;
 };
 
@@ -53,15 +58,22 @@ const checkBalance = () => {
 };
 
 const showTransferForm = () => {
-    document.getElementById("formContainer")!.innerHTML = `
-        <h2>Transfer</h2>
-        <form id="transferForm" onsubmit="transfer(event)">
-            <label for="recipientAccountNumber">Enter recipient's 13-digit account number:</label>
-            <input type="text" id="recipientAccountNumber" required>
-            <label for="transferAmount">Enter amount to transfer:</label>
-            <input type="number" id="transferAmount" required>
-            <button type="submit">Transfer</button>
-        </form>
+    const formContainer = document.getElementById("formContainer");
+    formContainer.innerHTML = `
+        <div class="container mt-4">
+            <h2 class="mb-3">Transfer</h2>
+            <form id="transferForm" onsubmit="transfer(event)">
+                <div class="form-group">
+                    <label for="recipientAccountNumber">Enter recipient's 13-digit account number:</label>
+                    <input type="text" class="form-control" id="recipientAccountNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="transferAmount">Enter amount to transfer:</label>
+                    <input type="number" class="form-control" id="transferAmount" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Transfer</button>
+            </form>
+        </div>
     `;
 };
 
@@ -90,14 +102,20 @@ const transfer = (event: Event) => {
 const showChangePinForm = (): void => {
     const formContainer = document.getElementById("formContainer") as HTMLElement;
     formContainer.innerHTML = `
-        <h2>Change PIN</h2>
-        <form id="pinChangeForm">
-            <label for="oldPin">Enter old 4-digit PIN:</label>
-            <input type="password" id="oldPin" required>
-            <label for="newPin">Enter new 4-digit PIN:</label>
-            <input type="password" id="newPin" required>
-            <button type="button" onclick="changePin()">Change PIN</button>
-        </form>
+        <div class="container mt-4">
+            <h2 class="mb-3">Change PIN</h2>
+            <form id="pinChangeForm">
+                <div class="form-group">
+                    <label for="oldPin">Enter old 4-digit PIN:</label>
+                    <input type="password" class="form-control" id="oldPin" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPin">Enter new 4-digit PIN:</label>
+                    <input type="password" class="form-control" id="newPin" required>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="changePin()">Change PIN</button>
+            </form>
+        </div>
     `;
 };
 
@@ -121,7 +139,7 @@ const changePin = (): void => {
 };
 
 const exit = () => {
-    document.getElementById("output")!.innerText = "Exiting the application. Thank you!";
+    document.getElementById("output")!.innerText = "Thank you! for Using our application";
     document.getElementById("options")!.style.display = "none";
     document.getElementById("formContainer")!.innerText = "";
 };
