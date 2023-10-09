@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>ATM Machine Pin Code</title>
+    <title>ATM Machine</title>
 </head>
+
 <body>
-    
+    <div id="pinForm">
+        <h1>Enter 4-digit PIN</h1>
+        <form id="pinInputForm" onsubmit="authorize(event)">
+            <input type="password" id="pinInput" pattern="\d{4}" required>
+            <button type="submit">Authorize</button>
+        </form>
+    </div>
+    <div id="options" style="display: none;">
+        <h1>ATM Options</h1>
+        <button onclick="showWithdrawForm()">Withdraw</button>
+        <button onclick="checkBalance()">Balance Check</button>
+        <button onclick="showTransferForm()">Transfer</button>
+        <button onclick="showChangePinForm()">Change Pin</button>
+        <button onclick="exit()">Exit</button>
+    </div>
+    <div id="formContainer"></div>
+    <div id="output"></div>
     <script src="atm.js"></script>
 </body>
+
 </html>

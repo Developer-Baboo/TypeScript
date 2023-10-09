@@ -1,109 +1,113 @@
-let pincode: number = 1234;
+let pinCode: string = "1234";
 let maxAttempts: number = 3;
 let balance: number = 20000;
-const accountNumbers: number[] = [123456789, 987654321, 234567890, 876543210];
 
-const isValidAccount = (accountNumber: number): boolean => {
-    return accountNumbers.includes(accountNumber);
-};
+function authorize(event: Event) {
+    event.preventDefault();
+    const pinInput = (document.getElementById("pinInput") as HTMLInputElement).value;
 
-const withdraw = (amount: number): void => {
-    const minWithdrawalAmount: number = 500;
-    const maxWithdrawalAmount: number = 25000;
-    if (amount >= minWithdrawalAmount && amount <= maxWithdrawalAmount && amount % 500 === 0) {
-        if (balance >= amount) {
-            balance -= amount;
-            console.log(`Withdrawal successful. Remaining balance: ${balance}`);
-        } else {
-            console.log("Insufficient funds.");
+    if (pinInput === pinCode) {
+        document.getElementById("pinForm")!.style.display = "none";
+        document.getElementById("options")!.style.display = "block";
+        document.getElementById("output")!.innerText = "";
+    } else {
+        document.getElementById("output")!.innerText = "Incorrect PIN. Please try again.";
+        maxAttempts--;
+
+        if (maxAttempts === 0) {
+            document.getElementById("output")!.innerText = "Too many incorrect attempts. Exiting the application.";
+            document.getElementById("options")!.style.display = "none";
         }
-    } else {
-        console.log("Invalid amount for withdrawal. Amount must be in multiples of 500, minimum 500, and maximum 25000.");
-    }
-};
-
-const checkBalance = (): void => {
-    console.log(`Your Available Balance is: ${balance}`);
-};
-
-const transfer = (amount: number, recipientAccountNumber: number): void => {
-    if (balance >= amount) {
-        const recipientIndex: number = accountNumbers.indexOf(recipientAccountNumber);
-        if (recipientIndex !== -1) {
-            balance -= amount;
-            console.log(`Transfer successful. Remaining balance: ${balance}`);
-        } else {
-            console.log("Recipient account not found. Transfer failed.");
-        }
-    } else {
-        console.log("Insufficient funds for transfer.");
-    }
-};
-
-const changePin = (oldPin: number, newPin: number): void => {
-    if (oldPin === pincode) {
-        pincode = newPin;
-        console.log("Pin changed successfully.");
-    } else {
-        console.log("Incorrect old pin. Pin change failed.");
-    }
-};
-
-let attempts: number = 0;
-let continueTransactions: boolean = true;
-
-while (attempts < maxAttempts && continueTransactions) {
-    let userPin: number = Number(prompt("Enter your 4-digit pin code:"));
-    if (userPin === pincode) {
-        while (continueTransactions) {
-            console.log("1. Withdraw");
-            console.log("2. Balance Check");
-            console.log("3. Transfer");
-            console.log("4. Change Pin");
-            console.log("5. Exit");
-            let choice: number = Number(prompt("Enter your choice:"));
-
-            switch (choice) {
-                case 1:
-                    let withdrawAmount: number = Number(prompt("Enter amount to withdraw (multiples of 500, min 500, max 25000):"));
-                    if (withdrawAmount >= 500 && withdrawAmount <= 25000 && withdrawAmount % 500 === 0) {
-                        withdraw(withdrawAmount);
-                    } else {
-                        console.log("Invalid amount for withdrawal.");
-                    }
-                    break;
-                case 2:
-                    checkBalance();
-                    break;
-                case 3:
-                    let recipientAccountNumber: number = Number(prompt("Enter recipient's 9-digit account number:"));
-                    if (isValidAccount(recipientAccountNumber)) {
-                        let transferAmount: number = Number(prompt("Enter amount to transfer:"));
-                        transfer(transferAmount, recipientAccountNumber);
-                    } else {
-                        console.log("Recipient account not found. Transfer failed.");
-                    }
-                    break;
-                case 4:
-                    let oldPin: number = Number(prompt("Enter old pin:"));
-                    let newPin: number = Number(prompt("Enter new pin:"));
-                    changePin(oldPin, newPin);
-                    break;
-                case 5:
-                    console.log("Exiting the application. Thank you!");
-                    continueTransactions = false;
-                    break;
-                default:
-                    console.log("Invalid choice. Please try again.");
-            }
-        }
-        break;
-    } else {
-        attempts++;
-        console.log(`Incorrect pin. ${maxAttempts - attempts} attempts left.`);
     }
 }
 
-if (attempts === maxAttempts) {
-    console.log("Too many incorrect attempts. Exiting the application.");
+function showWithdrawForm() {
+    document.getElementById("formContainer")!.innerHTML = `
+        <h2>Withdraw</h2>
+        <form id="withdrawForm" onsubmit="withdraw(event)">
+            <label for="withdrawAmount">Enter amount to withdraw (multiples of 500, min 500, max 25000):</label>
+            <input type="number" id="withdrawAmount" required>
+            <button type="submit">Withdraw</button>
+        </form>
+    `;
+}
+
+function withdraw(event: Event) {
+    event.preventDefault();
+    const amount = parseInt((document.getElementById("withdrawAmount") as HTMLInputElement).value);
+
+    if (amount >= 500 && amount <= 25000 && amount % 500 === 0 && amount <= balance) {
+        balance -= amount;
+        document.getElementById("output")!.innerText = `Withdrawal successful. Remaining balance: ${balance}`;
+    } else {
+        document.getElementById("output")!.innerText = "Invalid amount for withdrawal or insufficient funds.";
+    }
+    clearForm();
+}
+
+function checkBalance() {
+    document.getElementById("output")!.innerText = `Your Available Balance is: ${balance}`;
+    clearForm();
+}
+
+function showTransferForm() {
+    document.getElementById("formContainer")!.innerHTML = `
+        <h2>Transfer</h2>
+        <form id="transferForm" onsubmit="transfer(event)">
+            <label for="recipientAccountNumber">Enter recipient's 13-digit account number:</label>
+            <input type="text" id="recipientAccountNumber" required>
+            <label for="transferAmount">Enter amount to transfer:</label>
+            <input type="number" id="transferAmount" required>
+            <button type="submit">Transfer</button>
+        </form>
+    `;
+}
+
+function transfer(event: Event) {
+    event.preventDefault();
+    const recipientAccountNumber = (document.getElementById("recipientAccountNumber") as HTMLInputElement).value;
+    const transferAmount = parseInt((document.getElementById("transferAmount") as HTMLInputElement).value);
+
+    if (recipientAccountNumber.length === 13 && balance >= transferAmount && transferAmount >= 1) {
+        balance -= transferAmount;
+        document.getElementById("output")!.innerText = `Transfer successful. Remaining balance: ${balance}`;
+    } else {
+        document.getElementById("output")!.innerText = "Invalid recipient account or transfer amount exceeds balance.";
+    }
+    clearForm();
+}
+
+function showChangePinForm() {
+    document.getElementById("formContainer")!.innerHTML = `
+        <h2>Change PIN</h2>
+        <form id="pinChangeForm" onsubmit="changePin(event)">
+            <label for="newPin">Enter new 4-digit PIN:</label>
+            <input type="password" id="newPin" pattern="\d{4}" required>
+            <button type="submit">Change PIN</button>
+        </form>
+    `;
+}
+
+function changePin(event: Event) {
+    event.preventDefault();
+    const newPin = (document.getElementById("newPin") as HTMLInputElement).value;
+
+    if (newPin.length === 4) {
+        pinCode = newPin;
+        document.getElementById("output")!.innerText = "PIN changed successfully.";
+    } else {
+        document.getElementById("output")!.innerText = "Invalid PIN. Please enter a 4-digit number.";
+    }
+    clearForm();
+}
+
+function exit() {
+    document.getElementById("output")!.innerText = "Exiting the application. Thank you!";
+    document.getElementById("options")!.style.display = "none";
+    document.getElementById("formContainer")!.innerText = "";
+}
+
+function clearForm() {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => form.reset());
 }
