@@ -12,16 +12,16 @@
                 <div class="form-group">
                     <input type="password" class="form-control" id="pinInput" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Authorize</button>
+                <button type="submit" class="btn btn-warning">Authorize</button>
             </form>
         </div>
         <div id="options" style="display: none;" class="mt-4">
             <h1 class="mb-4">ATM Options</h1>
-            <button class="btn btn-secondary mr-2" onclick="showWithdrawForm()">Withdraw</button>
+            <button class="btn btn-primary mr-2" onclick="showWithdrawForm()">Withdraw</button>
             <button class="btn btn-secondary mr-2" onclick="checkBalance()">Balance Check</button>
-            <button class="btn btn-secondary mr-2" onclick="showTransferForm()">Transfer</button>
-            <button class="btn btn-secondary mr-2" onclick="showChangePinForm()">Change Pin</button>
-            <button class="btn btn-secondary" onclick="exit()">Exit</button>
+            <button class="btn btn-success mr-2" onclick="showTransferForm()">Transfer</button>
+            <button class="btn btn-danger mr-2" onclick="showChangePinForm()">Change Pin</button>
+            <button class="btn btn-warning" onclick="exit()">Exit</button>
         </div>
         <div id="formContainer" class="mt-4"></div>
         <div id="output" class="mt-4 alert alert-info"></div>

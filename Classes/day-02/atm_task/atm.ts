@@ -16,7 +16,7 @@ const authorize = (event: Event) => {
         maxAttempts--;
 
         if (maxAttempts === 0) {
-            alert("Too many incorrect attempts. Exiting the application.");
+            alert("Too many incorrect attempts. Please try again latter.");
             document.getElementById("options")!.style.display = "none";
             document.getElementById("pinInputForm")!.style.display = "none";
         }
@@ -33,7 +33,7 @@ const showWithdrawForm = () => {
                     <label for="withdrawAmount">Enter amount to withdraw (multiples of 500, min 500, max 25000):</label>
                     <input type="number" class="form-control" id="withdrawAmount" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Withdraw</button>
+                <button type="submit" class="btn btn-dark">Withdraw</button>
             </form>
         </div>
     `;
@@ -71,7 +71,7 @@ const showTransferForm = () => {
                     <label for="transferAmount">Enter amount to transfer:</label>
                     <input type="number" class="form-control" id="transferAmount" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Transfer</button>
+                <button type="submit" class="btn btn-dark">Transfer</button>
             </form>
         </div>
     `;
@@ -113,7 +113,7 @@ const showChangePinForm = (): void => {
                     <label for="newPin">Enter new 4-digit PIN:</label>
                     <input type="password" class="form-control" id="newPin" required>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="changePin()">Change PIN</button>
+                <button type="button" class="btn btn-info" onclick="changePin()">Change PIN</button>
             </form>
         </div>
     `;
