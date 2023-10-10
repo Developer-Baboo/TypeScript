@@ -12,9 +12,9 @@ const authorize = (event: Event) => {
     // Check if user has entered PIN is correct
     if (pinInput === pinCode) {
          // Hide PIN input form and display transaction options
-        document.getElementById("pinForm")!.style.display = "none";
-        document.getElementById("options")!.style.display = "block";
-        document.getElementById("output")!.innerText = "";
+        document.getElementById("pinForm")!.style.display = "none"; // hide form page
+        document.getElementById("options")!.style.display = "block"; //SHOW OPTION WITHDRAW, TRANSFER ETC
+        document.getElementById("output")!.innerText = ""; //SHOW OUTPUT EMPTY
     } else {
         // Display error message for incorrect PIN
         document.getElementById("output")!.innerText = "Incorrect PIN. Please try again.";
@@ -95,12 +95,14 @@ const showTransferForm = () => {
 // Function to handle transfer logic
 const transfer = (event: Event) => {
     event.preventDefault();
+    // validAccountNumbers
     const recipientAccountNumber = (document.getElementById("recipientAccountNumber") as HTMLInputElement).value;
     const transferAmount = parseInt((document.getElementById("transferAmount") as HTMLInputElement).value);
 
     // Validate recipient account number and transfer amount, update balance if valid
     let isValidRecipient = false;
 
+    //validAccountNumbers is the name of above array
     validAccountNumbers.forEach(accountNumber => {
         if (recipientAccountNumber === accountNumber && recipientAccountNumber.length === 13 && balance >= transferAmount && transferAmount >= 1) {
             isValidRecipient = true;

@@ -2,30 +2,44 @@
 <html lang="en">
 <head>
     <title>ATM Machine</title>
+
+    <!-- Boostrap CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+
+    <!-- Awesome Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
 </head>
-<body class="bg-light">
-    <div class="container mt-5">
+<body class="bg-light d-flex justify-content-center align-items-center">
+    <div class="container mt-5 border p-4 rounded">
+        <h1 class="text-center mb-4"> Welcome to our ATM <i class="fas fa-hand-wave"></i></h1>
         <div id="pinForm" class="text-center">
-            <h1 class="mb-4">Enter 4-digit PIN</h1>
+            <h2 class="mb-4">Enter 4-digit PIN</h2>
             <form id="pinInputForm" onsubmit="authorize(event)">
                 <div class="form-group">
                     <input type="password" class="form-control" id="pinInput" required>
                 </div>
-                <button type="submit" class="btn btn-warning">Authorize</button>
+                <button type="submit" class="btn btn-warning">
+                    Login <i class="fas fa-sign-in-alt"></i>
+                </button>
             </form>
         </div>
         <div id="options" style="display: none;" class="mt-4">
             <h1 class="mb-4">ATM Options</h1>
-            <button class="btn btn-primary mr-2" onclick="showWithdrawForm()">Withdraw</button>
-            <button class="btn btn-secondary mr-2" onclick="checkBalance()">Balance Check</button>
-            <button class="btn btn-success mr-2" onclick="showTransferForm()">Transfer</button>
-            <button class="btn btn-danger mr-2" onclick="showChangePinForm()">Change Pin</button>
-            <button class="btn btn-warning" onclick="exit()">Exit</button>
+            <button class="btn btn-primary mr-2" onclick="showWithdrawForm()">Withdraw Money <i class="fas fa-money-bill-wave"></i>
+            </button>
+            <button class="btn btn-secondary mr-2" onclick="checkBalance()">Check Money <i class="fas fa-check-circle"></i></button>
+            <button class="btn btn-success mr-2" onclick="showTransferForm()">Transfer Money <i
+                    class="fas fa-exchange-alt"></i></button>
+            <button class="btn btn-danger mr-2" onclick="showChangePinForm()">Change Pin <i class="fas fa-key"></i></button>
+            <button class="btn btn-warning" onclick="exit()">Exit <i class="fas fa-sign-out-alt"></i></button>
         </div>
         <div id="formContainer" class="mt-4"></div>
         <div id="output" class="mt-4 alert alert-info"></div>
     </div>
+    <!-- <script src="https://kit.fontawesome.com/a076d05399.js"></script> -->
     <script src="atm.js"></script>
 </body>
+
 </html>
