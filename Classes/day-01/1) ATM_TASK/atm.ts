@@ -90,11 +90,11 @@ while (attempts < maxAttempts && continueTransactions) {
                     changePin(oldPin, newPin);
                     break;
                 case 5:
-                    console.log("Exiting the application. Thank you!");
+                    console.log("Thankyou for using our services");
                     continueTransactions = false;
                     break;
                 default:
-                    console.log("Invalid choice. Please try again.");
+                    console.log("Invalid choice. Please try again Later");
             }
         }
         break;
@@ -105,5 +105,5 @@ while (attempts < maxAttempts && continueTransactions) {
 }
 
 if (attempts === maxAttempts) {
-    console.log("Too many incorrect attempts. Exiting the application.");
+    console.log("Too many attempts. Try Again Later");
 }
