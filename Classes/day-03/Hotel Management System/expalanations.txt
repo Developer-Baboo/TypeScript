@@ -1,0 +1,13 @@
+Scenario: Creating a Library Management System
+
+1. Create a class called `Library Item` that represents an item in the library. Include properties like `title`, `author`, `ID`, and `available` status.
+
+2. Implement two subclasses `Book` and `Magazine` that inherit from `Library Item`. Add additional properties and methods that are specific to each type.
+
+3. Develop a `Library` class that manages a collection of `Library Item` objects. Include methods to add items, remove items, and display available items.
+
+4. Implement a `Library Member` class that represents a member of the library. Include properties like `name`, `memberID`, and `checkedOutItems` array.
+
+5. Create methods for the `Library Member` class to check out and return items. Ensure that the number of checked-out items is within the limits.
+
+6. Test the system by creating instances of the `Library`, `Library Item`, and `Library Member` classes, and perform various operations like adding items to the library, checking out items, and displaying the available items.
