@@ -1,3 +1,12 @@
+/*
+Scenario: Creating a Library Management System
+1. Create a class called `LibraryItem` that represents an item in the library. Include properties like `title`, `author`, `ID`, and `available` status.
+2. Implement two subclasses `Book` and `Magazine` that inherit from `LibraryItem`. Add additional properties and methods that are specific to each type.
+3. Develop a `Library` class that manages a collection of `LibraryItem` objects. Include methods to add items, remove items, and display available items.
+4. Implement a `LibraryMember` class that represents a member of the library. Include properties like `name`, `memberID`, and `checkedOutItems` array.
+5. Create methods for the `LibraryMember` class to check out and return items. Ensure that the number of checked-out items is within the limits.
+6. Test the system by creating instances of the `Library`, `LibraryItem`, and `LibraryMember` classes, and perform various operations like adding items to the library, checking out items, and displaying the available items.
+ */
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -13,7 +22,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-// Define a class representing a generic library item with properties: title, author, ID, and availability status.
+// Define a class  with properties: title, author, ID, and availability status.
 var LibraryItem = /** @class */ (function () {
     function LibraryItem(title, author, ID, available) {
         this.title = title;
@@ -23,7 +32,7 @@ var LibraryItem = /** @class */ (function () {
     }
     return LibraryItem;
 }());
-// Extend LibraryItem to create a Book class with an additional genre property.
+// Extend LibraryItem Class with properties
 var Book = /** @class */ (function (_super) {
     __extends(Book, _super);
     function Book(title, author, ID, genre) {
@@ -33,7 +42,7 @@ var Book = /** @class */ (function (_super) {
     }
     return Book;
 }(LibraryItem));
-// Extend LibraryItem to create a Magazine class with an additional issueNumber property.
+// Extend LibraryItem with additional properties
 var Magazine = /** @class */ (function (_super) {
     __extends(Magazine, _super);
     function Magazine(title, author, ID, issueNumber) {
@@ -100,12 +109,12 @@ var LibraryMember = /** @class */ (function () {
     return LibraryMember;
 }());
 // Example Usage
-var book1 = new Book("The Catcher in the Rye", "J.D. Salinger", 1, "Fiction");
-var magazine1 = new Magazine("National Geographic", "Various", 2, 123);
+var book1 = new Book("Hamlet", "Shakespeare", 1, "Fiction");
+var magazine1 = new Magazine("Rich Dad and Poor Dad", "Robert", 2, 123);
 var library = new Library();
 library.addItem(book1);
 library.addItem(magazine1);
-var member = new LibraryMember("John Doe", 101);
+var member = new LibraryMember("Baboo Kumar", 101);
 member.checkoutItem(book1);
 library.displayAvailableItems();
 member.checkoutItem(magazine1); // Not available, should display a message
