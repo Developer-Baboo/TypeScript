@@ -2,34 +2,34 @@ type Product = {
   id: number;
   name: string;
   price: number;
-  inStock: boolean;
+  in_stock: boolean;
 };
 
 type ProductKeys = keyof Product;
 
-function isProductAvailable(product: Product): boolean {
-  return product.inStock;
+function is_product_available(product: Product): boolean {
+  return product.in_stock;
 }
 
 type Discount<T> = T extends { price: number } ? { discountPrice: number } : {};
 
-type ProductWithDiscount = Product & Discount<Product>;
+type product_with_discount = Product & Discount<Product>;
 
-function hasDiscount(product: ProductWithDiscount): product is ProductWithDiscount
+function has_discount(product: product_with_discount): product is product_with_discount
 {
   return 'discountPrice' in product;
 }
 
-const product1: Product = { id: 1, name: 'Product One', price: 30, inStock: true };
+const product1: Product = { id: 1, name: 'Product One', price: 30, in_stock: true };
 
-const discountedProduct: ProductWithDiscount = { id: 2, name: 'Discounted Product', price: 50, inStock: true, discountPrice: 40 };
+const discounted_price: product_with_discount = { id: 2, name: 'Discounted Product', price: 50, in_stock: true, discountPrice: 40 };
 
-console.log(isProductAvailable(product1));
+console.log(is_product_available(product1));
 
-console.log(isProductAvailable(discountedProduct));
+console.log(is_product_available(discounted_price));
 
-if (hasDiscount(discountedProduct)) {
-  console.log(`Discounted Price: ${discountedProduct.discountPrice}`);
+if (has_discount(discounted_price)) {
+  console.log(`Discounted Price: ${discounted_price.discountPrice}`);
 }
 
 else
