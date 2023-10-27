@@ -10,3 +10,5 @@ function sum(a, b) {
     return a + b;
 }
 console.log(sum(5, 10));
+// IN typecript, type annotation is a way of explicitly specifying the type of a variable
+// function parameter or function return value
