@@ -1,0 +1,7 @@
+Step 1: Define the `Authenticated` decorator that checks whether the user is authenticated before allowing access to a specific method.
+
+Step 2: Define the `Log` decorator that logs the execution of a specific method.
+
+Step 3: Create a class `SecureApp` to represent a secure web application, and apply the `Authenticated` and `Log` decorators to the `sensitiveData` method.
+
+Step 4: Demonstrate the usage of the `SecureApp` class by calling the `sensitiveData` method.
