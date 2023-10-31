@@ -1,1 +1,0 @@
-Build an online quiz platform where users can create quizzes, attempt quizzes, and view detailed results. Implement features like timer, question types, and quiz categories. Store quiz data, user responses, and results in arrays.
