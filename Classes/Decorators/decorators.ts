@@ -2,12 +2,11 @@
 export function Authenticated(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
     descriptor.value = function (...args: any[]) {
-        // Check if the user is authenticated (you can implement your authentication logic here)
-        const isAuthenticated = true; // Replace with your authentication logic
-        if (isAuthenticated) {
+        const authenticated = true; // For demonstration purposes, assuming user is authenticated
+        if (authenticated) {
             return originalMethod.apply(this, args);
         } else {
-            throw new Error("User is not authenticated");
+            return "Access Denied: User not authenticated.";
         }
     };
     return descriptor;
@@ -16,7 +15,7 @@ export function Authenticated(target: any, propertyKey: string, descriptor: Prop
 export function Log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
     descriptor.value = function (...args: any[]) {
-        console.log(`Executing method ${propertyKey}`);
+        console.log(`Executing ${propertyKey} method.`);
         return originalMethod.apply(this, args);
     };
     return descriptor;

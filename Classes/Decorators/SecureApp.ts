@@ -1,10 +1,12 @@
-// SecureApp.ts
-import { Authenticated, Log } from './decorators';
+// secureApp.ts
+import { Authenticated, Log } from "./decorators";
 
-export default class SecureApp {
+class SecureApp {
     @Authenticated
     @Log
-    sensitiveData() {
-        console.log("Accessing sensitive data...");
+    sensitiveData(): string {
+        return "Sensitive data accessed successfully.";
     }
 }
+
+export default SecureApp;

@@ -1,10 +1,15 @@
-// index.ts
-import SecureApp from './SecureApp';
+// main.ts
+import SecureApp from "./secureApp";
 
-const app = new SecureApp();
+// Create an instance of SecureApp
+const secureApp = new SecureApp();
 
-try {
-    app.sensitiveData(); // This should log method execution if authenticated
-} catch (error) {
-    console.error(error.message);
-}
+// Call the sensitiveData method (it will be logged and checked for authentication)
+const output: string = secureApp.sensitiveData();
+
+// Write the output to a file
+const fs = require("fs");
+fs.writeFileSync("output.txt", output);
+
+// Output will also be printed in the console
+console.log(output);
