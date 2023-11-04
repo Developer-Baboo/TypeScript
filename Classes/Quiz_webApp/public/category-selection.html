@@ -20,17 +20,21 @@
                         <option value="html">HTML</option>
                         <option value="css">CSS</option>
                     </select>
+    
                 </div>
-                <div id="instructions" class="d-none">
-                    <h2>Test Instructions</h2>
-                    <p>Read the questions carefully and select the correct answers.</p>
-                    <!-- Add specific instructions for HTML and CSS categories here -->
-                </div>
+                <center><button class="btn btn-primary" onclick="redirectToInstructions()">Next</button></center>
             </div>
         </div>
     </div>
 
     <script src="main.js"></script>
+    <script>
+        function redirectToInstructions() {
+            const selectedCategory = document.getElementById('category').value;
+            // Redirect to the instructions page with selected category as a query parameter
+            window.location.href = `instructions.html?category=${selectedCategory}`;
+        }
+    </script>
 </body>
 
 </html>

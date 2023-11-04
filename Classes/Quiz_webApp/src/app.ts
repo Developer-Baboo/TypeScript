@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Define user data array
   const users: { email: string; password: string }[] = [
     { email: 'user@example.com', password: 'password123' },
-    // Add more user data as needed
   ];
 
   // Get form and error message element
@@ -30,5 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Login failed, show error message
       errorMessage.textContent = 'Invalid email or password. Please try again.';
     }
+
+    
   });
 });
