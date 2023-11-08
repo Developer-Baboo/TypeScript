@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Applications</title>
+</head>
+<body>
+    <h1>Quiz page</h1>
+    <div id="quiz-container"></div>
+</body>
+<script src="main.js"></script>
+<script type="text/typescript" ts-script>
+    console.log("H2O");
+        // Define a class for Question with options
+        class Question {
+            constructor(public questionText: string, public options: string[]) { }
+        }
+
+        // Array of questions with options
+        const questions: Question[] = [
+            new Question('What is the capital of France?', ['Paris', 'Berlin', 'London', 'Madrid']),
+            new Question('Which planet is known as the Red Planet?', ['Mars', 'Earth', 'Venus', 'Jupiter']),
+            new Question('What is the chemical symbol for water?', ['H2O', 'CO2', 'O2', 'CH4']),
+            // Add more questions as needed
+        ];
+
+        // Function to display questions on the HTML page
+        function displayQuestions() {
+            const quizContainer = document.getElementById('quiz-container');
+
+            questions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `<strong>Question ${index + 1}:</strong> ${question.questionText}`;
+
+                const optionsList = document.createElement('ul');
+                question.options.forEach(option => {
+                    const optionItem = document.createElement('li');
+                    optionItem.textContent = option;
+                    optionsList.appendChild(optionItem);
+                });
+
+                questionDiv.appendChild(optionsList);
+                quizContainer?.appendChild(questionDiv);
+            });
+        }
+
+        // Call the displayQuestions function when the page is loaded
+        window.onload = displayQuestions;
+
+</script>
+</html>
